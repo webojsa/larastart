@@ -16,7 +16,7 @@ Route::prefix('auth')->group(function(){
 });
 
 Route::middleware('auth:sanctum')->group(function(){
-
+    Route::post('product/create',[\App\Http\Controllers\ProductController::class,'newProduct']);
 
     Route::middleware('db.restricted')->group(function(){
 
