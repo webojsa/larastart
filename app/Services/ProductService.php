@@ -21,10 +21,15 @@ class ProductService implements IsProductAvailable
         //
     }
 
-    public function createNewProduct(Request $request){
+    public function createNewProduct(Request $request):array{
         $fields = $this->maper($request);
         $product = Product::create($fields);
         return $product->toArray();
+    }
+
+    public function deleteProduct(int $productId):bool{
+        $product = Product::where('id', $productId)->firstOrFail();
+        return $product->delete();
     }
 
     public function maper(Request $request):array{
