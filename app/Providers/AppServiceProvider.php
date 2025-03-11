@@ -24,5 +24,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Schema::defaultStringLength(191);
+        RateLimiter::for('login', function(Request $request){
+            return [
+                Limit::perMinute(60)->by($request->ip()),
+                Limit::perMinute(3)->by($request->input('email'))
+            ];
+        });
     }
 }
