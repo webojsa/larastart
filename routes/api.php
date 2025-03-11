@@ -13,3 +13,11 @@ Route::prefix('auth')->group(function(){
    Route::post('login',[\App\Http\Controllers\AuthController::class, 'login'])->middleware(['throttle:login']);
    Route::post('logout',[\App\Http\Controllers\AuthController::class, 'logout'])->middleware('auth:sanctum');
 });
+
+Route::middleware('auth:sanctum')->group(function(){
+
+
+    Route::middleware('db.restricted')->group(function(){
+
+    });
+});
