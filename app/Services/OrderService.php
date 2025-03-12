@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Events\OrderCreated;
 use App\Http\Requests\OrderRequest;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -43,7 +44,7 @@ class OrderService
             OrderItem::insert($data);
             $this->order = $order;
         });
-
+        event(new OrderCreated($this->order));
         return $this->order;
 
     }
