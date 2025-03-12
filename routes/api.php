@@ -28,3 +28,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
     });
 });
+
+Route::get('test', function(){
+    \Illuminate\Support\Facades\Gate::authorize('is_admin');
+});

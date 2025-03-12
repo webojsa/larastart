@@ -17,6 +17,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => \App\Http\Middleware\Admin::class
         ]);
     })
+    ->withProviders([
+      \App\Providers\GateServiceProvider::class
+    ])
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
