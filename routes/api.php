@@ -19,6 +19,8 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('product/create',[\App\Http\Controllers\ProductController::class,'newProduct']);
     Route::delete('product/{id}',[\App\Http\Controllers\ProductController::class,'deleteProduct']);
 
+    Route::post('orders', [\App\Http\Controllers\OrderController::class, 'createOrder']);
+
     Route::middleware('db.restricted')->group(function(){
         Route::delete('r-product/{id}',[\App\Http\Controllers\ProductController::class,'deleteProduct']);
     });
