@@ -13,7 +13,8 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-            'db.restricted' => \App\Http\Middleware\DbRestricted::class
+            'db.restricted' => \App\Http\Middleware\DbRestricted::class,
+            'admin' => \App\Http\Middleware\Admin::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

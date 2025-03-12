@@ -17,7 +17,13 @@ Route::prefix('auth')->group(function(){
 
 Route::middleware('auth:sanctum')->group(function(){
 
+    Route::group([
+        'prefix' => 'admin',
+        'middleware' => 'admin',
+        'as' => 'admin'
+    ], function(){
 
+    });
     Route::middleware('db.restricted')->group(function(){
 
     });
