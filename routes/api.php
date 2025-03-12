@@ -20,6 +20,8 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::delete('product/{id}',[\App\Http\Controllers\ProductController::class,'deleteProduct']);
 
     Route::post('orders', [\App\Http\Controllers\OrderController::class, 'createOrder']);
+    Route::get('order/{id}',[\App\Http\Controllers\OrderController::class, 'showOrder']);
+    Route::put('orderstatus', [\App\Http\Controllers\OrderController::class, 'updateStatus']);
 
     Route::middleware('db.restricted')->group(function(){
         Route::delete('r-product/{id}',[\App\Http\Controllers\ProductController::class,'deleteProduct']);
