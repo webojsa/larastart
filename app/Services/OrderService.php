@@ -8,6 +8,7 @@ use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class OrderService
 {
@@ -48,8 +49,9 @@ class OrderService
     }
 
     public function getOrder(int $order_id):array{
-
-       $q = DB::table('orders as o')
+        $order = Order::where('id', $order_id)->firstOrFail();
+        Gate::authorize('view', $order);
+        $q = DB::table('orders as o')
             ->select("o.id", "o.status as order_status", "oi.quantity", "oi.price", "oi.discount"
                             , "p.title as product_title"
                             , "o.created_at","o.updated_at")
@@ -80,6 +82,7 @@ class OrderService
 
     public function updateStatus(int $order_id, $status){
         $order = Order::where('id', $order_id)->firstOrfail();
+        Gate::authorize('modify',$order);
         $order->status = $status;
         return  $order->save();
     }
